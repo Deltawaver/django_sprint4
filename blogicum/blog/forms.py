@@ -7,6 +7,8 @@ User = get_user_model()
 
 
 class PostForm(forms.ModelForm):
+    """Форма создания/редактирования поста."""
+
     class Meta:
         model = Post
         fields = ('title', 'text', 'pub_date', 'location', 'category', 'image')
@@ -27,12 +29,19 @@ class PostForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    """Форма добавления/редактирования комментария."""
+
     class Meta:
         model = Comment
         fields = ('text',)
+        widgets = {
+            'text': forms.Textarea(attrs={'rows': 3})
+        }
 
 
 class UserForm(forms.ModelForm):
+    """Форма редактирования профиля."""
+
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'email')
